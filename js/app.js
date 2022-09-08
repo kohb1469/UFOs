@@ -33,10 +33,10 @@ function updateFilters() {
     let changedElement = d3.select(this);
     // Save the value that was changed as a variable.
     let elementValue = changedElement.property("value");
-    console.log(elementValue);
+    
     // Save the id of the filter that was changed as a variable.
     let filterId = changedElement.attr("id");
-    console.log(filterId);
+    
     
   
     // If a filter value was entered then add that filterId and value
@@ -61,11 +61,14 @@ function updateFilters() {
     
     //Loop through all of the filters and keep any data that
     // matches the filter values
+    
     for(let i = 0; i < Object.keys(filters).length; i++){
       let filterID = Object.keys(filters)[i];
-      let newVal = Object.values(filters)[i].property("value");
+      let newVal = Object.values(filters)[i];
       console.log(filterID + newVal);
-      filterData = filterData.filter(row => row.filterID === newVal);
+      console.log(filterData);
+      filterFunc = row => row[filterID] === newVal;
+      filterData = filterData.filter(filterFunc);
     }
     
     console.log(filterData);
